@@ -12,3 +12,6 @@ sourcemap.json
 
 # Local overrides
 *.local.project.json
+
+# selene Roblox standard library (regenerate: selene generate-roblox-std)
+roblox.yml

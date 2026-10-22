@@ -50,7 +50,7 @@ function Hud.new()
 	statusBar.Name = "Status"
 	statusBar.AnchorPoint = Vector2.new(0.5, 0)
 	statusBar.Position = UDim2.new(0.5, 0, 0, 14)
-	statusBar.Size = UDim2.new(0, 420, 0, 44)
+	statusBar.Size = UDim2.fromOffset(420, 44)
 	statusBar.BackgroundColor3 = BG
 	statusBar.BackgroundTransparency = 0.15
 	statusBar.Parent = gui
@@ -64,7 +64,7 @@ function Hud.new()
 	roster.Name = "Roster"
 	roster.AnchorPoint = Vector2.new(1, 0)
 	roster.Position = UDim2.new(1, -14, 0, 14)
-	roster.Size = UDim2.new(0, 240, 0, 56)
+	roster.Size = UDim2.fromOffset(240, 56)
 	roster.BackgroundColor3 = BG
 	roster.BackgroundTransparency = 0.15
 	roster.Parent = gui
@@ -81,7 +81,7 @@ function Hud.new()
 	button.Name = "Roll"
 	button.AnchorPoint = Vector2.new(0.5, 1)
 	button.Position = UDim2.new(0.5, 0, 1, -24)
-	button.Size = UDim2.new(0, 220, 0, 58)
+	button.Size = UDim2.fromOffset(220, 58)
 	button.BackgroundColor3 = ACCENT
 	button.Text = "ROLL"
 	button.Font = Enum.Font.GothamBold
@@ -99,17 +99,16 @@ function Hud.new()
 	end)
 
 	-- Toast (last tile effect / notices).
-	self.toastLabel = label(gui, UDim2.new(0, 460, 0, 30), UDim2.new(0.5, -230, 1, -100), "", 18)
+	self.toastLabel = label(gui, UDim2.fromOffset(460, 30), UDim2.new(0.5, -230, 1, -100), "", 18)
 	self.toastLabel.TextXAlignment = Enum.TextXAlignment.Center
 	self.toastLabel.TextTransparency = 1
 
 	-- Big banner for game over.
-	self.banner = label(gui, UDim2.new(1, 0, 0, 80), UDim2.new(0, 0, 0.42, 0), "", 34)
+	self.banner = label(gui, UDim2.new(1, 0, 0, 80), UDim2.fromScale(0, 0.42), "", 34)
 	self.banner.TextXAlignment = Enum.TextXAlignment.Center
 	self.banner.Font = Enum.Font.GothamBold
 	self.banner.TextTransparency = 1
 
-	self.diceTimer = 0
 	self:setRollEnabled(false)
 	return self
 end
@@ -158,13 +157,13 @@ function Hud:setPlayers(players, currentUserId)
 		row.Parent = self.roster
 		corner(row, 8)
 
-		local name = label(row, UDim2.new(0.55, 0, 1, 0), UDim2.new(0, 10, 0, 0), p.name, 16)
+		local name = label(row, UDim2.fromScale(0.55, 1), UDim2.fromOffset(10, 0), p.name, 16)
 		name.Font = Enum.Font.GothamBold
 
 		local stats = label(
 			row,
 			UDim2.new(0.45, -12, 1, 0),
-			UDim2.new(0.55, 0, 0, 0),
+			UDim2.fromScale(0.55, 0),
 			string.format("%d c   %d *", p.coins, p.stars),
 			16
 		)
@@ -175,10 +174,10 @@ function Hud:setPlayers(players, currentUserId)
 	end
 
 	local count = math.max(1, #players)
-	self.roster.Size = UDim2.new(0, 240, 0, 14 + count * 40)
+	self.roster.Size = UDim2.fromOffset(240, 14 + count * 40)
 end
 
-function Hud:showRoll(userId, base, total)
+function Hud:showRoll(_userId, base, total)
 	local bonus = (total or base) - base
 	if bonus > 0 then
 		self:toast(string.format("rolled %d (+%d bonus)", base, bonus))
