@@ -1,0 +1,30 @@
+{
+  "name": "RollRush",
+  "tree": {
+    "$className": "DataModel",
+
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "RollRush": {
+        "$path": "src/shared"
+      }
+    },
+
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+      "RollRush": {
+        "$path": "src/server"
+      }
+    },
+
+    "StarterPlayer": {
+      "$className": "StarterPlayer",
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+        "RollRush": {
+          "$path": "src/client"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+# Rojo build output
+build/
+*.rbxl
+*.rbxlx
+*.rbxl.lock
+*.rbxlx.lock
+
+# Editor / OS noise
+.DS_Store
+.vscode/
+sourcemap.json
+
+# Local overrides
+*.local.project.json
